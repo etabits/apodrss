@@ -1,0 +1,29 @@
+{
+  "name": "apodrss",
+  "packageManager": "yarn@3.1.0",
+  "author": {
+    "name": "Hasan Arous",
+    "email": "arous.hasan@gmail.com",
+    "url": "https://www.aularon.com/"
+  },
+  "license": "MIT",
+  "scripts": {
+    "generate": "ts-node -T generate.ts",
+    "lint": "eslint --fix ."
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "feed": "^4.2.2",
+    "jsdom": "^18.1.1"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^16.2.13",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "latest",
+    "eslint-plugin-import": "^2.25.2",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  }
+}
