@@ -12,7 +12,7 @@ const feed = new Feed({
   favicon: "https://apod.nasa.gov/favicon.ico",
   copyright: "APOD.nasa.gov",
   updated: new Date(),
-  generator: "apodrss",
+  generator: "https://github.com/etabits/apodrss",
   // feedLinks: {
   //   json: "https://example.com/json",
   //   atom: "https://example.com/atom"
