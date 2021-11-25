@@ -5,10 +5,10 @@ import axios from 'axios';
 const baseUrl = 'https://apod.nasa.gov/apod/'
 
 export async function index() {
-  // const page = (await axios.get('https://apod.nasa.gov/apod/archivepix.html'))
+  const page = (await axios.get('https://apod.nasa.gov/apod/archivepix.html'))
   // console.log(html.)
-  const html = await readFile('/tmp/apodrss/archivepix.html', 'utf-8')
-  const links = [...new JSDOM(html).window.document
+  // const html = await readFile('/tmp/apodrss/archivepix.html', 'utf-8')
+  const links = [...new JSDOM(page.data).window.document
     .querySelectorAll('a')]
     .filter(a => a.getAttribute('href').match(/^ap\d{6}\.html$/))
     .slice(0, 60)
