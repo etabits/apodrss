@@ -26,7 +26,7 @@ const feed = new Feed({
 
 console.log('getting latest index...')
 index().then(async links => {
-  console.log('getting pages...')
+  console.log('getting pages, latest is: %s (%s)', links[0].title, links[0].href)
   let i = 0;
   const pages = await Promise.all(links.map(link =>
     day(link.href)
