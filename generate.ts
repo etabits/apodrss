@@ -2,6 +2,8 @@ import { writeFile } from 'fs/promises'
 import { Feed } from "feed";
 import { day, index } from "./scraper";
 
+const outFname = process.argv[2] || 'en'
+
 const feed = new Feed({
   title: "APOD",
   description: "Astronomy Picture of the Day",
@@ -51,5 +53,14 @@ index().then(async links => {
     })
   })
 
-  writeFile('apod.rss', feed.rss2())
+  Object.entries({
+    rss: feed.rss2(),
+    atom: feed.atom1(),
+    json: feed.json1()
+  }).forEach(([ext, data]) => {
+    const fname = outFname + '.' + ext;
+    writeFile(fname, data).then(() => {
+      console.log('wrote', fname)
+    })
+  })
 })
