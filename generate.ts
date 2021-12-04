@@ -4,6 +4,14 @@ import { day, index } from "./scraper";
 
 const outFname = process.argv[2] || 'en'
 
+const authors = [{
+  name: "Robert Nemiroff (MTU)",
+  link: "http://www.phy.mtu.edu/faculty/Nemiroff.html"
+}, {
+  name: "Jerry Bonnell (UMCP)",
+  link: "https://antwrp.gsfc.nasa.gov/htmltest/jbonnell/www/bonnell.html",
+}]
+
 const feed = new Feed({
   title: "APOD",
   description: "Astronomy Picture of the Day",
