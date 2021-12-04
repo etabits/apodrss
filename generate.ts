@@ -71,7 +71,7 @@ index().then(async links => {
   // this is hacky! Feed does not support dc:creator!
   const rss = feed.rss2().replaceAll(/(\s+)<guid>(\d{6})<\/guid>/g, (xml, whitespace, slug) => {
     // console.log(a, b)
-    return xml
+    return xml.replace(/\d+/, (guid) => `https://apod.nasa.gov/apod/ap${guid}.html`)
       + [...pagesBySlug[slug].author, ...authors]
         .map(a => whitespace + `<dc:creator>${a.name}</dc:creator>`)
         .join('')
