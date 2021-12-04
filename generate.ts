@@ -51,13 +51,19 @@ index().then(async links => {
       })
   ))
   console.log('writing rss file...')
-  pages.forEach(page => {
+  pages.forEach((page) => {
+    const { title, link, slug, content, date, image, author, description } = page
     feed.addItem({
-      title: page.title,
-      id: page.url,
-      link: page.url,
-      content: page.body,
-      date: page.date,
+      title,
+      id: slug,
+      guid: slug,
+      link,
+      content,
+      date,
+      image,
+      contributor: author,
+      description,
+      author: [...author, ...authors],
     })
   })
 

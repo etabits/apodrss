@@ -65,10 +65,14 @@ export async function day(fname: string) {
   return {
     pageTitle,
     date,
-    url,
+    link: url,
     image,
-    title: cTitleCred.querySelector('b').textContent.trim(),
-    body: document.querySelector('body > p').innerHTML.trim(),
+    title,
+    author,
+    fname,
+    description,
+    slug: fname.substring(2, 8),
+    content: content.innerHTML.trim(),
   }
 }
 
