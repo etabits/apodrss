@@ -65,7 +65,7 @@ index().then(async links => {
       image,
       contributor: author,
       description,
-      author: [...author, ...authors],
+      // author: [...author, ...authors],
     })
   })
   // this is hacky! Feed does not support dc:creator!
