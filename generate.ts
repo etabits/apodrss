@@ -27,11 +27,11 @@ const feed = new Feed({
   //   json: "https://example.com/json",
   //   atom: "https://example.com/atom"
   // },
-  // author: {
-  //   name: "Robert Nemiroff (MTU) & Jerry Bonnell (UMCP)",
-  //   email: "johndoe@example.com",
-  //   link: "http://www.phy.mtu.edu/faculty/Nemiroff.html"
-  // },
+  author: {
+    name: "Robert Nemiroff (MTU) & Jerry Bonnell (UMCP)",
+    // email: "johndoe@example.com",
+    link: "https://apod.nasa.gov/apod/lib/about_apod.html"
+  },
 });
 
 console.log('getting latest index...')
