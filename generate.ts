@@ -68,9 +68,16 @@ index().then(async links => {
       author: [...author, ...authors],
     })
   })
-
+  // this is hacky! Feed does not support dc:creator!
+  const rss = feed.rss2().replaceAll(/(\s+)<guid>(\d{6})<\/guid>/g, (xml, whitespace, slug) => {
+    // console.log(a, b)
+    return xml
+      + [...pagesBySlug[slug].author, ...authors]
+        .map(a => whitespace + `<dc:creator>${a.name}</dc:creator>`)
+        .join('')
+  })
   Object.entries({
-    rss: feed.rss2(),
+    rss,
     atom: feed.atom1(),
     json: feed.json1()
   }).forEach(([ext, data]) => {
