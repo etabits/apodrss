@@ -7,7 +7,7 @@ const baseUrl = 'https://apod.nasa.gov/apod/'
 export async function index() {
   const page = (await axios.get('https://apod.nasa.gov/apod/archivepix.html'))
   // console.log(html.)
-  // const html = await readFile('/tmp/apodrss/archivepix.html', 'utf-8')
+  // const page = { data: await readFile('/tmp/apodrss/archivepix.html', 'utf-8') }
   const links = [...new JSDOM(page.data).window.document
     .querySelectorAll('a')]
     .filter(a => a.getAttribute('href').match(/^ap\d{6}\.html$/))
@@ -23,6 +23,7 @@ export async function day(fname: string) {
   const url = new URL(fname, baseUrl).toString()
   // const html = await readFile('/tmp/apodrss/ap211124.html', 'utf-8')
   const page = await axios.get(url)
+  // const page = { data: await readFile('/tmp/apodrss/ap211124.html', 'utf-8') }
   const document = new JSDOM(page.data).window.document
   // console.log('>>>', document.body.outerHTML)
   const pageTitle = document.querySelector('title').textContent.trim()
