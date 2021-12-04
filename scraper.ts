@@ -88,5 +88,5 @@ async function extractImageUrl(cImg: Element) {
   const vimeoUrl = `http://vimeo.com/api/v2/video/${src.match(/player\.vimeo\.com\/video\/(\d+)/).pop()}.json`;
   const vimeoData = await axios.get(vimeoUrl)
   // console.log(vimeoData.data)
-  return vimeoData.data[0].thumbnail_medium
+  return vimeoData.data[0].thumbnail_large + '.jpg'
 }
