@@ -53,7 +53,7 @@ export async function day(fname: string) {
     7, 0, 0) // Gotta FIXME timezone, or get file info from remote file
   // console.log(cTitleCred, document.querySelectorAll('center'))
 
-  const image = await extractImageUrl(cImg)
+  const [image, mediaElement] = await extractImageUrl(cImg)
   // console.log(fname, image)
   // console.log(image, !!img)
 
@@ -72,21 +72,24 @@ export async function day(fname: string) {
     fname,
     description,
     slug: fname.substring(2, 8),
-    content: content.innerHTML.trim(),
+    content: mediaElement.outerHTML.trim() + '<br>' + content.innerHTML.trim(),
   }
 }
 
-async function extractImageUrl(cImg: Element) {
+async function extractImageUrl(cImg: Element): Promise<[string, HTMLElement]> {
   const img = cImg.querySelector('img')
   if (img) {
-    return new URL(img.getAttribute('src'), baseUrl).toString()
+    const src = new URL(img.getAttribute('src'), baseUrl).toString()
+    img.src = src
+    return [src, img]
   }
-  const src = cImg.querySelector('iframe').getAttribute('src')
+  const iframe = cImg.querySelector('iframe')
+  const src = iframe.getAttribute('src')
   if (src.includes('youtube')) {
-    return `https://img.youtube.com/vi/${src.match(/embed\/(.{11})/).pop()}/sddefault.jpg`
+    return [`https://img.youtube.com/vi/${src.match(/embed\/(.{11})/).pop()}/sddefault.jpg`, iframe]
   }
   const vimeoUrl = `http://vimeo.com/api/v2/video/${src.match(/player\.vimeo\.com\/video\/(\d+)/).pop()}.json`;
   const vimeoData = await axios.get(vimeoUrl)
   // console.log(vimeoData.data)
-  return vimeoData.data[0].thumbnail_large + '.jpg'
+  return [vimeoData.data[0].thumbnail_large + '.jpg', iframe]
 }
