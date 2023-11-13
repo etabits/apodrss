@@ -73,7 +73,7 @@ index().then(async links => {
     // console.log(a, b)
     return xml.replace(/\d+/, (guid) => `https://apod.nasa.gov/apod/ap${guid}.html`)
       + [...pagesBySlug[slug].author, ...authors]
-        .map(a => whitespace + `<dc:creator>${a.name}</dc:creator>`)
+        .map(a => whitespace + `<dc:creator>${replaceHTMLEntities(a.name)}</dc:creator>`)
         .join('')
   })
   Object.entries({
@@ -87,3 +87,19 @@ index().then(async links => {
     })
   })
 })
+
+
+const htmlEntities = {
+  "<": "lt",
+  ">": "gt",
+  "&": "amp",
+  '"': "quot",
+  "'": "apos",
+};
+const htmlEntitiesRegExp = new RegExp(
+  `(${Object.keys(htmlEntities).join("|")})`,
+  "g"
+);
+
+const replaceHTMLEntities = (text: string) =>
+  text.replace(htmlEntitiesRegExp, (_, entity) => `&${htmlEntities[entity]};`);
