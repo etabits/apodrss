@@ -75,6 +75,8 @@ index().then(async links => {
       + [...pagesBySlug[slug].author, ...authors]
         .map(a => whitespace + `<dc:creator>${replaceHTMLEntities(a.name)}</dc:creator>`)
         .join('')
+  }).replaceAll(/<enclosure url="(.*?)".*?\/>/g, (xml, url) => {
+    return xml.replace(/url=".*?"/, `url="${replaceHTMLEntities(url)}"`)
   })
   Object.entries({
     rss,
