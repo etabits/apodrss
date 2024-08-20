@@ -38,7 +38,7 @@ console.log('getting latest index...')
 index().then(async links => {
   console.log('getting pages, latest is: %s (%s)', links[0].title, links[0].href)
   let i = 0;
-  const pages = await Promise.all(links.map(link =>
+  const rawPages = await Promise.all(links.map(link =>
     day(link.href)
       .then(l => {
         process.stdout.write(`\r[${++i}/${links.length}]`)
@@ -47,9 +47,9 @@ index().then(async links => {
       .catch(e => {
         console.error(e)
         console.error(link)
-        throw e
       })
   ))
+  const pages = rawPages.filter(Boolean)
   console.log('writing rss file...')
   const pagesBySlug = {}
   pages.forEach((page) => {
