@@ -77,7 +77,7 @@ export async function day(fname: string) {
 }
 
 async function extractImageUrl(cImg: Element): Promise<[string, HTMLElement]> {
-  const img = cImg.querySelector('img')
+  const img = cImg.querySelector('img') ?? cImg.querySelector('video > source')
   if (img) {
     const src = new URL(img.getAttribute('src'), baseUrl).toString()
     img.src = src
